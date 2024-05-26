@@ -1,0 +1,59 @@
+<nz-breadcrumb class="breadcrumb-container" nzSeparator=">">
+  <nz-breadcrumb-item
+    *ngFor="let breadcrumb of breadcrumbs"
+    routerLink="/dashboard/library"
+    [queryParams]="breadcrumb.param ? { type: breadcrumb.param } : {}"
+  >
+    <a>{{ breadcrumb.name }}</a></nz-breadcrumb-item
+  >
+</nz-breadcrumb>
+
+<div *ngIf="isBookTypeSelected" class="books-container">
+  <div *ngFor="let book of books">
+    <app-book-card
+      [isHeartDisplayed]="false"
+      [isLibraryCard]="true"
+      [cardBookData]="book"
+    ></app-book-card>
+  </div>
+</div>
+
+<div *ngIf="!isBookTypeSelected" class="book-type-select-container">
+  <nz-card class="card">
+    <div
+      class="card-content"
+      routerLink="/dashboard/library"
+      [queryParams]="{ type: 'AudioBooks' }"
+    >
+      <div class="book-cover-container">
+        <img class="icon" src="../../../../../assets/pictures/sound-icon.svg" />
+      </div>
+      <div class="book-title">Audio Books</div>
+    </div>
+  </nz-card>
+
+  <nz-card class="card">
+    <div
+      class="card-content"
+      routerLink="/dashboard/library"
+      [queryParams]="{ type: 'EBooks' }"
+    >
+      <div class="book-cover-container">
+        <img class="icon" src="../../../../../assets/pictures/ebook.svg" />
+      </div>
+      <div class="book-title">E-Books</div>
+    </div>
+  </nz-card>
+
+  <nz-card class="card" >
+    <div class="card-content" (click)="getLastReadBook()">
+      <div class="book-cover-container">
+        <img
+          class="img"
+          [src]="'data:image/png;base64,' + bookCover"
+        />
+      </div>
+      <div class="book-title">Last Read Book</div>
+    </div>
+  </nz-card>
+</div>

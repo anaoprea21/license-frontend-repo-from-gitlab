@@ -1,0 +1,103 @@
+@import "../../../../../assets/styles/colors.scss";
+#full-year-management-page {
+  height: 100%;
+  padding: 2rem;
+  background-color: $white;
+
+  .img-container {
+    width: calc(10vw / 2);
+    height: calc(15vw * 50 / 100);
+
+    .img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .no-events {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .new-card {
+    height: 30vh;
+    width: 30vh;
+
+    cursor: pointer;
+    background-color: $grey;
+    color: white;
+    font-weight: 600;
+    font-size: 5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    position: relative;
+    height: 30vh;
+    width: 30vh;
+
+    .card-content {
+      height: calc(30vh - 48px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .week-day {
+        font-size: 2rem;
+      }
+
+      .book-title {
+        color: var(--secondary);
+        font-size: 1.1rem;
+        word-break: break-word;
+        font-weight: 500;
+      }
+
+      .text {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .date-details {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .time-left-container {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .more-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--secondary);
+
+    border: 0;
+    border-radius: 8px;
+
+    padding: 5px;
+
+    position: absolute;
+    bottom: -0.5rem;
+    right: -0.5rem;
+  }
+
+  .more-btn:hover {
+    background-color: var(--lighter-secondary);
+  }
+}

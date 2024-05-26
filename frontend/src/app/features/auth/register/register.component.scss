@@ -1,0 +1,62 @@
+@import "../../../../assets/styles/colors.scss";
+
+.login-section {
+  background-color: var(--primary);
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .title {
+    font-size: 26px;
+  }
+
+  .inputs {
+    width: 70%;
+  }
+
+  .login-and-submit-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .login-btn {
+      color: var(--secondary);
+      cursor: pointer;
+    }
+    .btn {
+      background-color: var(--secondary);
+      border-color: var(--secondary);
+      color: $white;
+      border-radius: 8px;
+    }
+  }
+
+  .google-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    .google-login-btn {
+      background-color: var(--secondary);
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 30px;
+
+      img {
+        background-color: $white;
+        height: 30px;
+      }
+      .google-login-text {
+        color: $white;
+        padding: 0px 10px;
+      }
+    }
+  }
+}
+

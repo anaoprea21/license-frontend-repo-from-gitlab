@@ -1,0 +1,112 @@
+<div *ngFor="let cartBook of cartBooks">
+  <app-book-cart-data
+    (refreshBooks)="refreshBooks()"
+    [cardBookData]="cartBook"
+  ></app-book-cart-data>
+</div>
+<div class="books-total">Total: ${{ booksTotal }}</div>
+<div class="buy-btn-container">
+  <button class="buy-btn btn" nz-button nzType="primary" (click)="openModal()">
+    Finish purchase
+  </button>
+</div>
+
+<nz-modal
+  [nzClosable]="false"
+  [nzBodyStyle]="{ height: '40vh' }"
+  [nzCentered]="true"
+  [(nzVisible)]="isCardDataModalVisible"
+  nzTitle="Card Data"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <form
+      nz-form
+      nzLayout="vertical"
+      [formGroup]="validateInputs"
+      class="inputs"
+    >
+      <nz-form-item>
+        <nz-form-label nzFor="cardNumberForm">Card Number</nz-form-label>
+        <nz-form-control>
+          <input
+            maxlength="16"
+            #inputElement
+            nz-input
+            formControlName="cardNumberForm"
+            nzOverlayClassName="numeric-input"
+            [ngModel]="cardNumber"
+            placeholder="0000-0000-0000-0000"
+            (ngModelChange)="onChange($event, 'cardNumber')"
+            (blur)="onBlur('cardNumber')"
+          />
+          <div
+            class="is-error help"
+            *ngIf="cardNumberForm?.errors?.['required'] && cardNumberForm?.dirty"
+          >
+            Please add the card number!
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="expDateForm">Card Expiration Date</nz-form-label>
+        <nz-form-control>
+          <div style="display: flex; align-items: center; gap: 5px">
+            <nz-select style="width: 100px" formControlName="expDateDayForm">
+              <nz-option
+                *ngFor="let day of dayOptions"
+                [nzValue]="day"
+                [nzLabel]="day"
+              ></nz-option>
+            </nz-select>
+            <span style="font-size: 2rem; margin-top: -5px">/</span>
+            <nz-select style="width: 100px" formControlName="expDateMonthForm">
+              <nz-option
+                *ngFor="let month of monthOptions"
+                [nzValue]="month"
+                [nzLabel]="month"
+              ></nz-option>
+            </nz-select>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div style="display: flex; justify-content: space-between">
+        <nz-form-item>
+          <nz-form-label nzFor="codeForm">Card Security Code</nz-form-label>
+          <nz-form-control>
+            <input
+              #inputElement3
+              nz-input
+              formControlName="codeForm"
+              nzOverlayClassName="numeric-input"
+              [ngModel]="cardCode"
+              placeholder="000"
+              maxlength="3"
+              (ngModelChange)="onChange($event, 'cardCode')"
+              (blur)="onBlur('cardCode')"
+            />
+            <div
+              class="is-error help"
+              *ngIf="codeForm?.errors?.['required'] && codeForm?.dirty"
+            >
+              Please add the card security code!
+            </div>
+          </nz-form-control>
+        </nz-form-item>
+        <img
+          style="width: 200px; height: 100px"
+          src="data:image/png;base64,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"
+        />
+      </div>
+    </form>
+
+    <div style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+      <button class="btn" nz-button nzType="primary" (click)="verifyData()">
+        Submit
+      </button>
+    </div>
+  </ng-container>
+</nz-modal>

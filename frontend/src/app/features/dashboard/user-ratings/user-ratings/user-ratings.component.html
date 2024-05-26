@@ -1,0 +1,32 @@
+<div class="page-content">
+  <div class="header-container">
+    <div class="page-title">Ratings</div>
+    <button
+      nz-button
+      nzType="primary"
+      class="btn"
+      (click)="openAddRatingModal()"
+    >
+      Add New Rating
+    </button>
+  </div>
+  <div class="ratings-container">
+    <div class="no-ratings" *ngIf="userRatings.length === 0">
+      No ratings yet...
+      <br />
+      Go to <a routerLink="/dashboard/library">your library</a> to check the books you can rate, or press the button
+      on the upper right corner.
+    </div>
+    <app-ratings-list
+      (refresh)="getUserRatings()"
+      *ngIf="userRatings.length !== 0"
+      [ratings]="userRatings"
+    ></app-ratings-list>
+  </div>
+</div>
+<app-add-rating-modal
+  *ngIf="isVisible"
+  (refresh)="getUserRatings()"
+  [libraryBooks]="libraryBooks"
+  [(isVisible)]="isVisible"
+></app-add-rating-modal>

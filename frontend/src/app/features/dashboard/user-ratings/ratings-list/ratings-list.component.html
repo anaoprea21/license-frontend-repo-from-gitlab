@@ -1,0 +1,23 @@
+<div class="ratings-container">
+  <div *ngFor="let rating of ratings">
+    <div class="object-container">
+      <div class="img-container">
+        <img class="img" [src]="'data:image/png;base64,' + rating.picture" />
+      </div>
+      <div class="rating-info">
+        <div class="rating-title">
+          <div class="book-title">{{ rating.bookTitle }}</div>
+          <div>|</div>
+          <nz-rate
+            class="rating"
+            [ngModel]="rating.rating / 2"
+            nzAllowHalf
+            nzDisabled
+          ></nz-rate>
+        </div>
+
+        <div class="text">{{ rating.text }}</div>
+      </div>
+    </div>
+  </div>
+</div>

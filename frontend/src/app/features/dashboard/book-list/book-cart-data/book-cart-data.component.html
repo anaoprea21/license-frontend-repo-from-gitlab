@@ -1,0 +1,24 @@
+<nz-card class="card" (click)="gotToBookPage()">
+  <div class="card-content">
+    <div class="book-details-and-cover">
+      <div class="book-cover-container">
+        <img class="img" [src]="'data:image/png;base64,' + cardBookData.picture" />
+      </div>
+      <div class="book-details-container">
+        <div class="book-title" (click)="$event.stopPropagation()">{{ cardBookData.title }}</div>
+        <div (click)="$event.stopPropagation()">{{ cardBookData.author }}</div>
+        <nz-rate (click)="$event.stopPropagation()"
+        nzDisabled
+        [ngModel]="cardBookData.rating"
+        nzAllowHalf
+        ></nz-rate>
+      </div>
+    </div>
+    <div class="book-category" (click)="$event.stopPropagation()">Format: {{ cardBookData.bookType }}</div>
+    <div class="book-cart-details">
+      <div class="book-price" (click)="$event.stopPropagation()">$ {{ cardBookData.price }}</div>
+      <div class="remove-btn" (click)="removeFromCart(true); $event.stopPropagation()">Move to wishlist</div>
+      <div class="remove-btn" (click)="removeFromCart(false); $event.stopPropagation()"><span nz-icon nzType="delete" nzTheme="outline"></span> Remove</div>
+    </div>
+  </div>
+</nz-card>

@@ -1,0 +1,104 @@
+<div class="login-section">
+  <div class="title">Register</div>
+
+  <form nz-form nzLayout="vertical" class="inputs" [formGroup]="validateInputs">
+    <nz-form-item>
+      <nz-form-label nzFor="username">Username</nz-form-label>
+      <nz-form-control>
+        <input
+          nz-input
+          placeholder="user34"
+          formControlName="username"
+        />
+        <div
+          class="is-error"
+          *ngIf="username?.errors?.['required'] && username?.dirty"
+        >
+          Please add your username!
+        </div>
+
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="email">Email</nz-form-label>
+      <nz-form-control>
+        <input
+          nz-input
+          placeholder="my.email@example.com"
+          formControlName="userEmail"
+        />
+        <div
+          class="is-error"
+          *ngIf="userEmail?.errors?.['required'] && userEmail?.dirty"
+        >
+          Please add your email!
+        </div>
+        <div class="is-error" *ngIf="userEmail?.errors?.['emailValid']">
+          Your email is not valid!
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="email">Password</nz-form-label>
+      <nz-form-control>
+        <nz-input-group [nzSuffix]="suffixTemplate">
+          <input
+            [type]="isPasswordVisible ? 'text' : 'password'"
+            nz-input
+            placeholder="input password"
+            formControlName="password"
+          />
+        </nz-input-group>
+        <ng-template #suffixTemplate>
+          <span
+            nz-icon
+            [nzType]="isPasswordVisible ? 'eye-invisible' : 'eye'"
+            (click)="isPasswordVisible = !isPasswordVisible"
+          ></span>
+        </ng-template>
+        <div
+          class="is-error"
+          *ngIf="password?.errors?.['required'] && password?.dirty"
+        >
+          Please add your password!
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzFor="email">Confirm password</nz-form-label>
+      <nz-form-control>
+        <nz-input-group [nzSuffix]="suffixTemplateConfirm">
+          <input
+            [type]="isConfirmPasswordVisible ? 'text' : 'password'"
+            nz-input
+            placeholder="input password"
+            formControlName="confirmPassword"
+          />
+        </nz-input-group>
+        <ng-template #suffixTemplateConfirm>
+          <span
+            nz-icon
+            [nzType]="isConfirmPasswordVisible ? 'eye-invisible' : 'eye'"
+            (click)="isConfirmPasswordVisible = !isConfirmPasswordVisible"
+          ></span>
+        </ng-template>
+        <div
+          class="is-error"
+          *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.dirty"
+        >
+          Please confirm your password!
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <div class="login-and-submit-btns">
+      <div class="login-btn" routerLink="/auth/login">
+        Already have an account? Login...
+      </div>
+      <button nz-button nzType="primary" class="btn" (click)="verifyData()">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,35 @@
+<div id="specific-event">
+  <nz-drawer
+    [nzClosable]="false"
+    [nzVisible]="isVisible"
+    nzPlacement="right"
+    (nzOnClose)="close()"
+  >
+    <ng-container *nzDrawerContent>
+      <div id="event-container">
+        <div class="book-cover-container">
+          <div class="img-container">
+            <img class="img" [src]="'data:image/png;base64,' + eventData.cardData.bookCover" />
+          </div>
+          <div id="book-name">{{ eventData.cardData.bookTitle }}</div>
+        </div>
+        <div class="details">
+          <div>{{ eventData.cardData.time | date : "dd MMM, HH:mm" }}</div>
+          <div>{{ eventData.cardData.timeLeft }}</div>
+          <div>Note: {{ eventData.drawerData.description }}</div>
+        </div>
+      </div>
+      <div class="edit-btn-container">
+        <button (click)="openEditEvent()" nz-button nzType="primary">Edit</button>
+      </div>
+    </ng-container>
+  </nz-drawer>
+</div>
+
+<app-create-event-modal
+  *ngIf="isNewEventModalVisible"
+  [(isVisible)]="isNewEventModalVisible"
+  [isEditingEvent]="true"
+  [eventData]="eventModalData"
+  (editEvent)="editEvent($event)"
+></app-create-event-modal>

@@ -1,0 +1,60 @@
+<div class="page-content">
+  <div class="page-title">Books</div>
+  <div
+    style="display: grid; grid-template-columns: 18% 60%"
+    *ngIf="booksData.length !== 0"
+  >
+    <div></div>
+    <div class="filters">
+      <span class="filters-title">Filters</span>
+      <div style="display: flex; flex-direction: column;">
+        <div class="subtitle">Format</div>
+        <label
+          nz-checkbox
+          [(ngModel)]="filters.audio"
+          (ngModelChange)="typeFilters(true)"
+          >AudioBooks</label
+        >
+        <label
+          nz-checkbox
+          [(ngModel)]="filters.ebook"
+          (ngModelChange)="typeFilters(false)"
+          >EBooks</label
+        >
+        <div class="subtitle">Genres</div>
+        <div *ngFor="let genre of genreCheckBoxes">
+          <label
+            nz-checkbox
+            [ngModel]="genre.value"
+            (ngModelChange)="genreFilters(genre)"
+            >{{ genre.label }}</label
+          >
+        </div>
+      </div>
+    </div>
+    <div *ngIf="booksData.length !== 0">
+      <div class="books-container">
+        <div *ngFor="let book of booksData">
+          <app-book-card
+            [isHeartDisplayed]="true"
+            [cardBookData]="book"
+          ></app-book-card>
+        </div>
+      </div>
+      <div class="pagination">
+        <!--Pagination-->
+        <nz-pagination
+          [(nzPageIndex)]="body.page"
+          [nzTotal]="body.totalCount"
+          [nzSize]="'small'"
+          [nzHideOnSinglePage]="true"
+          (nzPageIndexChange)="getBooks(false)"
+        ></nz-pagination>
+      </div>
+      <nz-back-top></nz-back-top>
+    </div>
+    <span *ngIf="booksData.length === 0" class="no-books-yet-container">
+      No books yet
+    </span>
+  </div>
+</div>

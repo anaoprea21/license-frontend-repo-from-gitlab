@@ -1,0 +1,49 @@
+@import "../../../../assets/styles/colors.scss";
+
+#admin-layout {
+  height: 100%;
+
+  .icon {
+    padding-right: 0.6rem;
+    .log-out-icon {
+      height: 1rem;
+      width: 1rem;
+      opacity: 0.5;
+      margin-bottom: 2px;
+    }
+  }
+
+  .log-out-conatiner:hover {
+    .log-out-icon {
+      opacity: 1;
+    }
+  }
+
+  .all-books-icon {
+    padding-left: 0.4rem;
+  }
+
+  .page-inner-content {
+    overflow: auto;
+    height: 100%;
+  }
+}
+
+.logo {
+  height: 5rem;
+  margin: 1rem;
+  opacity: 0.4;
+}
+
+.collapsed{
+  height: 1.5rem;
+  margin: 1rem;
+  opacity: 0.4;
+}
+
+.img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}

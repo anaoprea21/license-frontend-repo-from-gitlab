@@ -1,0 +1,31 @@
+<div id="books-page-header-container">
+  <nz-input-group nzSearch [nzSuffix]="searchIcon" id="search-text-input">
+    <input
+      [(ngModel)]="searchText"
+      (input)="search()"
+      [nzAutocomplete]="auto"
+      type="text"
+      nz-input
+      placeholder="search..."
+    />
+    <nz-autocomplete #auto
+      ><nz-auto-option *ngFor="let option of options" [nzValue]="option.title" (click)="goToBookPage(option.id)">{{
+        option.title
+      }}</nz-auto-option></nz-autocomplete
+    >
+  </nz-input-group>
+  <ng-template #searchIcon>
+    <span nz-icon nzType="search"></span>
+  </ng-template>
+
+  <button nz-button nzType="primary" (click)="changeModalVisibility()">
+    Create Book
+  </button>
+</div>
+
+<app-book-manager-modal
+  *ngIf="isVisible"
+  [isEditing]="false"
+  (refreshTableData)="refreshData()"
+  [(isVisible)]="isVisible"
+></app-book-manager-modal>

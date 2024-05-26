@@ -1,0 +1,31 @@
+<div class="two-factor-section">
+  <div class="title">Enter your code</div>
+  <div class="resend-code">
+    <div>Didn't receive one?</div>
+    <div class="resend">Resend...</div>
+  </div>
+  <div class="code-and-btn">
+    <div class="code-and-error">
+      <div id="enter-code">
+        <input
+          *ngFor="let code of enteredCode; let index = index"
+          [id]="'element-' + index"
+          nz-input
+          [ngModel]="code.value"
+          (ngModelChange)="updateValue($event, index)"
+          [class.not-valid]="!isCodeValid"
+          [nzStatus]="isCodeValid ? '' : 'error'"
+          (focus)="focus()"
+          (keydown.enter)="login()"
+          (keyup.backspace)="deleteCharacter(index)"
+        />
+      </div>
+      <div *ngIf="!isCodeValid" class="not-valid error">
+        Wrong code, try again please.
+      </div>
+    </div>
+    <button [nzLoading]="isVerifyingCode" nz-button nzType="primary" class="login-btn" (click)="login()">
+      LOG-IN
+    </button>
+  </div>
+</div>

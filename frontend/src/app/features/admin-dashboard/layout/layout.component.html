@@ -1,0 +1,56 @@
+<nz-layout id="admin-layout">
+  <nz-sider
+    nzCollapsible
+    (nzCollapsedChange)="isCollapsed = !isCollapsed"
+    nzWidth="200px"
+  >
+    <div [class.logo]="!isCollapsed" [class.collapsed]="isCollapsed">
+      <img class="img" src="../../../../assets/pictures/digital_bookcase.jpg" />
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li
+        nz-menu-item
+        [nzSelected]="true"
+        nzMatchRouter
+        routerLink="/admin/books-table"
+        [queryParams]="{ type: 'all' }"
+      >
+        <span class="icon all-books-icon">☰</span
+        ><span *ngIf="!isCollapsed">All Books</span>
+      </li>
+      <li
+        nz-menu-item
+        nzMatchRouter
+        routerLink="/admin/books-table"
+        [queryParams]="{ type: 'AudioBooks' }"
+      >
+        <span class="icon">🎧</span><span *ngIf="!isCollapsed">Audiobooks</span>
+      </li>
+      <li
+        nz-menu-item
+        nzMatchRouter
+        routerLink="/admin/books-table"
+        [queryParams]="{ type: 'EBooks' }"
+      >
+        <span class="icon">🕮</span>
+        <span *ngIf="!isCollapsed">EBooks</span>
+      </li>
+      <li
+        (click)="logOut()"
+        class="log-out-conatiner"
+        nz-menu-item
+        nzMatchRouter
+      >
+        <span class="icon"
+          ><img
+            class="log-out-icon"
+            src="../../../../assets/pictures/logout.svg"
+        /></span>
+        <span *ngIf="!isCollapsed">LogOut</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout class="page-inner-content">
+    <router-outlet></router-outlet>
+  </nz-layout>
+</nz-layout>

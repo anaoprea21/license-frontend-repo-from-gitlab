@@ -1,0 +1,67 @@
+@import "../../../../assets/styles/colors.scss";
+
+.full-page {
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    .first-row {
+      background-color: var(--secondary);
+      display: grid;
+      grid-template-columns: 30% 40% 15% 15%;
+      .home {
+        margin: 0px 10px;
+        height: 1.8rem;
+        opacity: 0.6;
+        border-radius: 5px;
+      }
+      .search-input {
+        margin-top: 1px;
+        height: 1.8rem;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-right: 10px;
+        gap: 10px;
+      }
+    }
+    .second-row {
+      background-color: var(--lighter-secondary);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .menus {
+        margin: 0px 10px;
+        gap: 20px;
+
+        .dropdown {
+          color: $white;
+        }
+        .dropdown:hover {
+          color: var(--secondary);
+        }
+      }
+      .calendar {
+        margin: 0px 13px;
+        height: 1.5rem;
+      }
+    }
+  }
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+:host ::ng-deep .ant-layout-header {
+  padding: 0px;
+}

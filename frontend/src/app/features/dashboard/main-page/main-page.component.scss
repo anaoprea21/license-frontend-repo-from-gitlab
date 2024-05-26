@@ -1,0 +1,19 @@
+@import "../../../../assets/styles/colors.scss";
+
+.carousels {
+  background-color: $white;
+  height: 100%;
+  padding: 2rem;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  .title {
+    color: var(--secondary);
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+}

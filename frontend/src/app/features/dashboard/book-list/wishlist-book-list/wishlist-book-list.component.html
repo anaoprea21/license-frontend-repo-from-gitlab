@@ -1,0 +1,11 @@
+<div class="wishlist-books-container">
+  <div *ngFor="let wishlistBook of books">
+    <app-book-card
+      [cardBookData]="wishlistBook"
+      [isHeartDisplayed]="false"
+      [isLibraryCard]="false"
+      [isWishListCard]="true"
+      (refreshWishlistBooks)="refreshWishlistBooks()"
+    ></app-book-card>
+  </div>
+</div>

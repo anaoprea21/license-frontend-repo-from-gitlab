@@ -1,0 +1,10 @@
+#books-page-header-container {
+    display: flex;
+    justify-content: space-between;
+  
+    padding-bottom: 2rem;
+  
+    #search-text-input {
+      width: 30vw;
+    }
+  }

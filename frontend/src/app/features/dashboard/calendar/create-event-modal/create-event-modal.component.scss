@@ -1,0 +1,21 @@
+@import "../../../../../assets/styles/colors.scss";
+
+.event-date {
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+  .picker {
+    width: 100%;
+  }
+}
+
+.btns-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+::ng-deep .ant-modal-body {
+  overflow: auto;
+}

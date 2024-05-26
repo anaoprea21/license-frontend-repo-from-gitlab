@@ -1,0 +1,23 @@
+@import "../../../../../assets/styles/colors.scss";
+
+.books-total {
+  padding: 1rem 0;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.buy-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 1rem;
+
+  .buy-btn {
+  }
+}
+
+::ng-deep .ant-modal-body {
+  overflow: auto;
+}

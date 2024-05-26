@@ -1,0 +1,70 @@
+@import "../../../../assets/styles/colors.scss";
+
+.to-be-uploaded-image-container {
+  border: 2px dashed var(--secondary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#upload-image-container {
+  height: 10rem;
+  width: 6rem;
+  position: relative;
+
+  #upload-image-input {
+    height: 10rem;
+    width: 6rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+  }
+
+  #uploaded-image {
+    height: 10rem;
+    width: 6rem;
+  }
+}
+
+.picture-containing-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  .right-picture-cover {
+    display: flex;
+    flex-direction: column;
+
+    .number-inputs {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+}
+
+.help {
+  color: $warning;
+}
+
+.add-item-container {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+::ng-deep .ant-modal-body {
+  overflow: auto;
+}
+

@@ -1,0 +1,143 @@
+<nz-layout class="full-page">
+  <nz-header class="header">
+    <div class="first-row">
+      <img
+        src="../../../../assets/pictures/dbc.jpg"
+        class="home"
+        routerLink="/dashboard"
+      />
+      <nz-input-group nzSearch [nzSuffix]="searchIcon" class="search-input">
+        <input
+          [(ngModel)]="searchInput"
+          (input)="searchBook()"
+          [nzAutocomplete]="auto"
+          type="text"
+          nz-input
+          placeholder="search..."
+        />
+        <nz-autocomplete #auto
+          ><nz-auto-option
+            *ngFor="let option of options"
+            [nzValue]="option.title"
+            (click)="goToBookPage(option.id)"
+            (keyup.enter)="goToBookPage(option.id)"
+            >{{ option.title }}</nz-auto-option
+          ></nz-autocomplete
+        >
+      </nz-input-group>
+      <ng-template #searchIcon>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+      <div></div>
+      <div class="buttons">
+        <img
+          nz-dropdown
+          [nzDropdownMenu]="menu"
+          [nzClickHide]="false"
+          [(nzVisible)]="isAccountDropdownVisible"
+          src="../../../../assets/pictures/user-account.svg"
+        />
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li
+              nz-menu-item
+              routerLink="/admin/books-table"
+              [queryParams]="{ type: 'all' }"
+            >
+              Admin
+            </li>
+            <li nz-menu-item routerLink="/dashboard/library">My Library</li>
+            <li nz-menu-item (click)="goToRatings()">My Ratings</li>
+            <li nz-menu-item routerLink="/dashboard/account">
+              Account Settings
+            </li>
+            <li nz-menu-item (click)="logOut()">Log out</li>
+          </ul>
+        </nz-dropdown-menu>
+        <img
+          src="../../../../assets/pictures/book-list.svg"
+          (click)="goToBookList('wishlist')"
+        />
+        <img
+          src="../../../../assets/pictures/cart.svg"
+          (click)="goToBookList('cart')"
+        />
+      </div>
+    </div>
+    <div class="second-row">
+      <div class="centered menus">
+        <a
+          class="dropdown"
+          nz-dropdown
+          [nzDropdownMenu]="book"
+          routerLink="/dashboard/books-genre-page"
+          [queryParams]="{ type: 'All' }"
+        >
+          Books
+          <span nz-icon nzType="down"></span>
+        </a>
+        <nz-dropdown-menu #book="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <a
+              nz-menu-item
+              *ngFor="let genre of bookGenres"
+              routerLink="/dashboard/books-genre-page"
+              [queryParams]="{ type: 'All', genre: genre }"
+              >{{ genre }}</a
+            >
+          </ul>
+        </nz-dropdown-menu>
+        <a
+          class="dropdown"
+          nz-dropdown
+          [nzDropdownMenu]="audioBook"
+          routerLink="/dashboard/books-genre-page"
+          [queryParams]="{ type: 'AudioBooks' }"
+        >
+          AudioBooks
+          <span nz-icon nzType="down"></span>
+        </a>
+        <nz-dropdown-menu #audioBook="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <a
+              nz-menu-item
+              *ngFor="let genre of bookGenres"
+              routerLink="/dashboard/books-genre-page"
+              [queryParams]="{ type: 'AudioBooks', genre: genre }"
+              >{{ genre }}</a
+            >
+          </ul>
+        </nz-dropdown-menu>
+        <a
+          class="dropdown"
+          nz-dropdown
+          [nzDropdownMenu]="eBook"
+          routerLink="/dashboard/books-genre-page"
+          [queryParams]="{ type: 'EBooks' }"
+        >
+          EBooks
+          <span nz-icon nzType="down"></span>
+        </a>
+        <nz-dropdown-menu #eBook="nzDropdownMenu">
+          <ul nz-menu nzSelectable>
+            <a
+              nz-menu-item
+              *ngFor="let genre of bookGenres"
+              routerLink="/dashboard/books-genre-page"
+              [queryParams]="{ type: 'EBooks', genre: genre }"
+              >{{ genre }}</a
+            >
+          </ul>
+        </nz-dropdown-menu>
+      </div>
+      <div></div>
+      <div class="centered">
+        <img
+          src="../../../../assets/pictures/calendar.svg"
+          class="calendar"
+          routerLink="/dashboard/calendar"
+        />
+      </div></div
+  ></nz-header>
+  <nz-content><router-outlet></router-outlet></nz-content>
+</nz-layout>

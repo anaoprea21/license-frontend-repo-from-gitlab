@@ -1,0 +1,157 @@
+<div class="page-content">
+  <div class="book-data">
+    <div class="cover-container">
+      <img [src]="'data:image/png;base64,' + bookData.picture" class="cover" />
+    </div>
+
+    <div class="book-details-and-description-container">
+      <div class="book-details-container">
+        <span class="title">
+          {{ bookData.title }}
+        </span>
+
+        <div style="display: flex; align-items: center; gap: 1rem">
+          <div class="author">
+            <span class="normal-text">by</span> {{ bookData.author }}
+          </div>
+          <div style="margin-top: -1rem">|</div>
+          <span style="margin-top: -1rem">Format: {{ bookData.bookType }}</span>
+          <div style="margin-top: -1rem">|</div>
+          <nz-rate
+            style="margin-top: -1.2rem"
+            nzDisabled
+            [ngModel]="bookData.rating"
+            nzAllowHalf
+          ></nz-rate>
+        </div>
+
+        <div class="info-container">
+          <div class="info" nz-tooltip nzTooltipTitle="Publisher">
+            <img class="icon" src="../../../../assets/pictures/building.svg" />
+            <span>{{ bookData.publisher }}</span>
+          </div>
+          <div class="info" nz-tooltip nzTooltipTitle="Language">
+            <img class="icon" src="../../../../assets/pictures/planet.svg" />
+            <span>{{ bookData.language }}</span>
+          </div>
+          <div class="info" nz-tooltip nzTooltipTitle="Book Size">
+            <img
+              class="icon"
+              [src]="
+                bookData.bookType === 'AudioBooks'
+                  ? '../../../../assets/pictures/clock.svg'
+                  : '../../../../assets/pictures/page.svg'
+              "
+            />
+            <span>
+              {{ bookData.size }}
+              {{ bookData.bookType === "AudioBooks" ? "min" : "pages" }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="book-description-container">
+        <pre
+          [class.collapse]="!isWholeDescriptionVisible"
+          class="book-description"
+          >{{ seenDescription }}</pre
+        >
+        <div
+          *ngIf="!isWholeDescriptionVisible"
+          class="pointer"
+          (click)="changeDescriptionVisibility()"
+        >
+          > Read more
+        </div>
+        <pre *ngIf="isWholeDescriptionVisible" class="book-description">{{
+          hiddenDescription
+        }}</pre>
+        <div
+          *ngIf="isWholeDescriptionVisible"
+          style="display: flex; gap: 0.5rem"
+        >
+          Genre:
+          <div *ngFor="let genre of bookData.bookCategories">
+            <span
+              class="genre-tag"
+              routerLink="/dashboard/books-genre-page"
+              [queryParams]="{ type: 'All', genre: genre }"
+              >{{ genre }}</span
+            >
+          </div>
+        </div>
+
+        <div
+          *ngIf="isWholeDescriptionVisible"
+          class="pointer"
+          style="margin-top: 1rem"
+          (click)="changeDescriptionVisibility()"
+        >
+          ^ Read less
+        </div>
+      </div>
+      <div
+        *ngIf="!isReviewsContainerOpen && bookRatings?.length !== 0"
+        class="pointer"
+        (click)="isReviewsContainerOpen = !isReviewsContainerOpen"
+      >
+        > See Ratings
+      </div>
+      <div
+        *ngIf="isReviewsContainerOpen && bookRatings?.length !== 0"
+        class="pointer"
+        (click)="isReviewsContainerOpen = !isReviewsContainerOpen"
+      >
+        ^ Hide Ratings
+      </div>
+      <div
+        class="ratings-container"
+        *ngIf="isReviewsContainerOpen && bookRatings?.length !== 0"
+      >
+        <div *ngFor="let rating of bookRatings">
+          <div class="rating-info">
+            <div class="rating-title">
+              <div style="cursor: pointer" (click)="goToRatings(rating.userName)">
+                {{ rating.userName }}
+              </div>
+              <div>|</div>
+              <nz-rate
+                class="rating"
+                [ngModel]="rating.rating"
+                nzAllowHalf
+                nzDisabled
+              ></nz-rate>
+              <div>|</div>
+              <div>{{ rating.addedDate | date : "dd MMM yyyy" }}</div>
+            </div>
+            <div class="text">{{ rating.text }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-container">
+      <span class="price">{{ bookData.price }} €</span>
+      <button
+        nz-button
+        nzType="primary"
+        class="price-container-btn btn"
+        (click)="addToCart()"
+      >
+        Add to Cart
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        class="price-container-btn wishlist-btn"
+        (click)="addToWishlist()"
+      >
+        Add to Wishlist
+      </button>
+    </div>
+  </div>
+  <div class="bottom-carousel">
+    <app-book-carousel [data]="booksData"></app-book-carousel>
+  </div>
+</div>

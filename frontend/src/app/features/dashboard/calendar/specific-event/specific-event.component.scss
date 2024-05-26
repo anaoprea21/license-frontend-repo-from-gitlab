@@ -1,0 +1,41 @@
+@import "../../../../../assets/styles/colors.scss";
+
+#specific-event {
+  margin: 1rem;
+  height: 100%;
+}
+
+#event-container {
+  #book-name {
+    padding: 1rem 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .book-cover-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .img-container {
+      height: 50%;
+      width: 60%;
+      .img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .details {
+    background-color: var(--primary);
+  }
+}
+
+.edit-btn-container {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: flex-end;
+}

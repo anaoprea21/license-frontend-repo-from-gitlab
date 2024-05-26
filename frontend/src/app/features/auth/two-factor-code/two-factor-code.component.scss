@@ -1,0 +1,63 @@
+@import "../../../../assets/styles/colors.scss";
+
+.two-factor-section {
+  background-color: var(--primary);
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .title {
+    font-size: 26px;
+  }
+
+  .resend-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0px;
+
+    .resend:hover {
+      color: var(--secondary);
+      cursor: pointer;
+    }
+  }
+
+  .code-and-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+
+    .code-and-error {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      #enter-code {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0px 20px 0px;
+
+        input {
+          height: 4rem;
+          border-radius: 8px;
+          font-size: 50px;
+        }
+      }
+      .error {
+        margin-bottom: 10px;
+        color: $warning;
+      }
+    }
+
+    .login-btn {
+      background-color: var(--secondary);
+      border-color: var(--secondary);
+      color: $white;
+      border-radius: 8px;
+    }
+  }
+}

@@ -1,0 +1,97 @@
+@import "../../../../../assets/styles/colors.scss";
+
+.account-manager-content {
+  background-color: $white;
+  padding: 2rem;
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    .subtitle {
+      color: var(--secondary);
+      font-size: 1.5rem;
+    }
+
+    .reset-pass-subtitle {
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+
+    .reset-btn {
+      margin-bottom: 1rem;
+    }
+
+    .activity-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      hr {
+        width: 10vw;
+      }
+
+      .activity-row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        color: var(--secondary);
+      }
+
+      .activity-row-vertical-data {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .activity-row-horizontal-data {
+        display: flex;
+        gap: 1rem;
+        text-align: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.two-factor-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img-container {
+  height: 5vh;
+  width: 5vh;
+  .img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.themes-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  padding: 1rem 0;
+  .theme-dot {
+    display: flex;
+
+    .color {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+
+  .selected {
+    border: solid $warning;
+  }
+}
+
+.text {
+  color: var(--secondary);
+}

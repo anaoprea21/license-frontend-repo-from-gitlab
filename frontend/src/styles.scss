@@ -1,0 +1,118 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "assets/styles/colors.scss";
+
+.page-content {
+  padding: 2rem;
+  background-color: $white;
+  height: 100%;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 2rem;
+  color: var(--secondary);
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.is-error {
+  color: $warning;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: auto;
+  width: 10rem;
+}
+::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 8px;
+}
+
+.default {
+  --primary: #ffe2e2;
+  --lighter-primary: #fbeded;
+
+  --secondary: #d77d7d;
+  --lighter-secondary: #f4b5b5;
+
+  --white: white;
+  --grey: #f2f2f2;
+  --warning: red;
+}
+
+button {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.btn:hover {
+  background-color: var(--lighter-secondary);
+  border-color: var(--lighter-secondary);
+}
+
+.red {
+  --primary: #f07878;
+  --lighter-primary: #f19090;
+
+  --secondary: #e64747;
+  --lighter-secondary: #ff6666;
+
+  --white: white;
+  --grey: #f2f2f2;
+  --warning: red;
+}
+
+.purple {
+  --primary: #e5bfff;
+  --lighter-primary: #eccfff;
+
+  --secondary: #c27df0;
+  --lighter-secondary: #d79aff;
+
+  --white: white;
+  --grey: #f2f2f2;
+  --warning: red;
+}
+
+.aqua {
+  --primary: #5fbedb;
+  --lighter-primary: #87d7f0;
+
+  --secondary: #388ca5;
+  --lighter-secondary: #50a5be;
+
+  --white: white;
+  --grey: #f2f2f2;
+  --warning: red;
+}
+
+.yellow {
+  --primary: #ffcc6d;
+  --lighter-primary: #ffd484;
+
+  --secondary: #ca9a40;
+  --lighter-secondary: rgb(214, 171, 90);
+
+  --white: white;
+  --grey: #f2f2f2;
+  --warning: red;
+}

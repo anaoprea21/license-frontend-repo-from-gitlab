@@ -1,0 +1,169 @@
+<div class="account-manager-content">
+  <div class="page-title">My Account</div>
+
+  <div class="cards-container" *ngIf="accountData">
+    <nz-card>
+      <div class="subtitle">Account Settings</div>
+      <div class="card-content">
+        <div>
+          <form
+            nz-form
+            nzLayout="vertical"
+            [formGroup]="validateInputs"
+            class="inputs"
+          >
+            <nz-form-item>
+              <nz-form-label nzFor="email">Email</nz-form-label>
+              <nz-form-control>
+                <input
+                  nz-input
+                  placeholder="my.email@example.com"
+                  formControlName="email"
+                />
+                <div
+                  class="is-error"
+                  *ngIf="email?.errors?.['required'] && email?.dirty"
+                >
+                  Please add your email!
+                </div>
+                <div class="is-error" *ngIf="email?.errors?.['emailValid']">
+                  Your email is not valid!
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+            <div class="reset-pass-subtitle">Reset Password</div>
+
+            <nz-form-item>
+              <nz-form-label nzFor="email">Password</nz-form-label>
+              <nz-form-control>
+                <nz-input-group [nzSuffix]="suffixTemplate">
+                  <input
+                    [type]="isPasswordVisible ? 'text' : 'password'"
+                    nz-input
+                    placeholder="input password"
+                    formControlName="password"
+                  />
+                </nz-input-group>
+                <ng-template #suffixTemplate>
+                  <span
+                    nz-icon
+                    [nzType]="isPasswordVisible ? 'eye-invisible' : 'eye'"
+                    (click)="isPasswordVisible = !isPasswordVisible"
+                  ></span>
+                </ng-template>
+                <div
+                  class="is-error"
+                  *ngIf="password?.errors?.['required'] && password?.dirty"
+                >
+                  Please add your password!
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nzFor="email">Confirm password</nz-form-label>
+              <nz-form-control>
+                <nz-input-group [nzSuffix]="suffixTempla">
+                  <input
+                    nz-input
+                    [type]="isConfirmPasswordVisible ? 'text' : 'password'"
+                    placeholder="input password"
+                    formControlName="confirmPassword"
+                  />
+                </nz-input-group>
+                <ng-template #suffixTempla>
+                  <span
+                    nz-icon
+                    [nzType]="
+                      isConfirmPasswordVisible ? 'eye-invisible' : 'eye'
+                    "
+                    (click)="
+                      isConfirmPasswordVisible = !isConfirmPasswordVisible
+                    "
+                  ></span>
+                </ng-template>
+                <div
+                  class="is-error"
+                  *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.dirty"
+                >
+                  Please confirm your password!
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+            <div style="display: flex; justify-content: flex-end">
+              <button
+                (click)="resetPassword()"
+                nz-button
+                nzType="primary"
+                class="reset-btn btn"
+              >
+                Reset Password
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="subtitle">Two Factor</div>
+      <div class="two-factor-container">
+        <div>
+          The two factor status changing will send a confirmation email.
+        </div>
+        <a class="text" (click)="changeTwoFactorStatus()">{{
+          accountData.twoFactorStatus? 'Deactivate': 'Activate'
+        }}</a>
+      </div>
+    </nz-card>
+
+    <nz-card>
+      <div class="subtitle">My activity</div>
+      <div class="activity-container">
+        <a class="activity-row">
+          <div><hr /></div>
+          <div (click)="goToRatings()" class="activity-row-vertical-data">
+            {{ accountData.reviewsNumber }} ratings added
+            <nz-rate nzDisabled [ngModel]="5" nzAllowHalf></nz-rate>
+          </div>
+          <div><hr /></div>
+        </a>
+        <div class="activity-row">
+          <div><hr /></div>
+          <a
+            class="activity-row-horizontal-data"
+            routerLink="/dashboard/book-list/wishlist"
+          >
+            <div class="img-container">
+              <img class="img" src="../../../../../assets/pictures/heart.svg" />
+            </div>
+            <div class="text">newly added to wishlist</div>
+          </a>
+          <div><hr /></div>
+        </div>
+        <div class="activity-row">
+          <div><hr /></div>
+          <a class="activity-row-horizontal-data">
+            <div class="img-container">
+              <img class="img" src="../../../../../assets/pictures/page.svg" />
+            </div>
+            <div class="text" (click)="goToRecentlyAdded()">recently read</div>
+          </a>
+          <div><hr /></div>
+        </div>
+      </div>
+
+      <div class="subtitle">Theme color</div>
+      <div class="themes-container">
+        <div *ngFor="let color of colors">
+          <div
+            class="theme-dot"
+            [class.selected]="selectedId === color.id"
+            (click)="selectTheme(color)"
+          >
+            <div class="color" [style]="color.left"></div>
+            <div class="color" [style]="color.right"></div>
+          </div>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div id="books-page-container">
+  <app-book-header (refreshTableData)="getBooks()"></app-book-header>
+  <app-books-table
+    *ngIf="booksData"
+    (refreshTableData)="refresh($event)"
+    [isLoading]="isLoadingTableData"
+    [booksData]="booksData"
+  ></app-books-table>
+</div>

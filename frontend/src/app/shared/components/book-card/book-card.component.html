@@ -1,0 +1,54 @@
+<nz-card class="card" (click)="goToLibraryBook()">
+  <span
+    *ngIf="isWishListCard"
+    (click)="removeBookFromWishlist(); $event.stopPropagation()"
+    class="delete-btn"
+    nz-tooltip
+    nzTooltipTitle="Remove"
+    >X</span
+  >
+
+  <img
+    class="heart-icon"
+    src="../../../../assets/pictures/heart-outline.svg"
+    (click)="addToWishlist(); makingHeartVisible(); $event.stopPropagation()"
+    *ngIf="!cardBookData.wishListed && isHeartDisplayed"
+  />
+  <img
+    class="heart-icon"
+    nzRotate="90"
+    src="../../../../assets/pictures/heart.svg"
+    (click)="removeBookFromWishlist(); makingHeartVisible(); $event.stopPropagation()"
+    *ngIf="cardBookData.wishListed && isHeartDisplayed"
+  />
+  <div class="card-content">
+    <div class="book-cover-container">
+      <img
+        class="img"
+        [src]="'data:image/png;base64,' + cardBookData.picture"
+      />
+    </div>
+    <div (click)="$event.stopPropagation()" class="book-title">
+      {{ cardBookData.title }}
+    </div>
+    <div (click)="$event.stopPropagation()">
+      Format: {{ cardBookData.bookType }}
+    </div>
+    <div
+      (click)="$event.stopPropagation()"
+      *ngIf="!isLibraryCard"
+      class="book-price"
+    >
+      $ {{ cardBookData.price }}
+    </div>
+    <button
+      (click)="addToCart(); $event.stopPropagation()"
+      *ngIf="!isLibraryCard"
+      nz-button
+      nzType="primary"
+      class="btn"
+    >
+      Add to cart
+    </button>
+  </div>
+</nz-card>

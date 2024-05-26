@@ -1,0 +1,79 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="isEditingEvent ? 'Edit Event' : 'Add New Event'"
+  [nzClosable]="false"
+  [nzBodyStyle]="{ height: '30vh' }"
+  [nzCentered]="true"
+  [nzFooter]="null"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <form
+      nz-form
+      nzLayout="vertical"
+      [formGroup]="validateInputs"
+      class="inputs"
+    >
+      <nz-form-item>
+        <nz-form-label nzFor="title">Title</nz-form-label>
+        <nz-form-control>
+          <nz-select formControlName="title" nzPlaceHolder="library book">
+            <nz-option
+              *ngFor="let book of libraryBooks"
+              [nzValue]="book.uuid"
+              [nzLabel]="book.title"
+            ></nz-option>
+          </nz-select>
+          <div
+            class="is-error help"
+            *ngIf="title?.errors?.['required'] && title?.dirty"
+          >
+            Please add the event's book title!
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="date">Date</nz-form-label>
+        <nz-form-control>
+          <div class="event-date">
+            <div>
+              <nz-date-picker
+                class="picker"
+                formControlName="date"
+                (ngModelChange)="onChange($event)"
+              ></nz-date-picker>
+              <div
+                class="is-error help"
+                *ngIf="date?.errors?.['required'] && date?.dirty"
+              >
+                Please add the event's date!
+              </div>
+            </div>
+            <div>
+              <nz-time-picker
+                class="picker"
+                formControlName="time"
+                nzFormat="HH:mm"
+                [nzDefaultOpenValue]="undefined"
+              ></nz-time-picker>
+              <div
+                class="is-error help"
+                *ngIf="time?.errors?.['required'] && time?.dirty"
+              >
+                Please add the event's time?
+              </div>
+            </div>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div class="btns-container">
+        <button nz-button nzType="default" (click)="handleCancel()">
+          Cancel
+        </button>
+        <button class="btn" nz-button nzType="primary" (click)="verifyData()">Add</button>
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>

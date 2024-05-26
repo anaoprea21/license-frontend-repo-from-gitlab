@@ -1,0 +1,49 @@
+@import "../../../../../assets/styles/colors.scss";
+
+.page-content {
+  .books-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+.no-books-yet-container {
+  display: flex;
+  justify-content: center;
+  color: var(--secondary);
+  width: 100%;
+}
+
+.filters {
+  position: fixed;
+  padding: 1rem;
+  width: 15%;
+  height: max-content;
+
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+  .filters-title {
+    color: var(--secondary);
+    font-weight: 500;
+  }
+
+  .subtitle {
+    margin-top: 1rem;
+    color: var(--secondary);
+  }
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+::ng-deep .ant-slider-track {
+  background-color: var(--lighter-secondary);
+}
+
+::ng-deep .ant-checkbox-wrapper{
+  margin-left: 0 !important;
+}

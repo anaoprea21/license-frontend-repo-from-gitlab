@@ -1,0 +1,235 @@
+<nz-modal
+  [nzClosable]="false"
+  [nzBodyStyle]="{ height: '60vh' }"
+  [nzCentered]="true"
+  [(nzVisible)]="isVisible"
+  [nzTitle]="isEditing ? modalTitle.editing : modalTitle.creating"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <form
+      nz-form
+      nzLayout="vertical"
+      [formGroup]="validateInputs"
+      class="inputs"
+    >
+      <nz-form-item>
+        <nz-form-label nzFor="filePath">File Path</nz-form-label>
+        <nz-form-control>
+          <input
+            type="file"
+            id="upload-image-input"
+            (change)="uploadBookFile($event)"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="title">Title</nz-form-label>
+        <nz-form-control>
+          <input nz-input placeholder="book title" formControlName="title" />
+          <div
+            class="is-error help"
+            *ngIf="title?.errors?.['required'] && title?.dirty"
+          >
+            Please add the book title!
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="author">Author</nz-form-label>
+        <nz-form-control>
+          <input nz-input placeholder="book author" formControlName="author" />
+          <div
+            class="is-error help"
+            *ngIf="author?.errors?.['required'] && author?.dirty"
+          >
+            Please add the book publisher!
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div class="picture-containing-row">
+        <nz-form-item>
+          <nz-form-label nzFor="cover">Cover</nz-form-label>
+          <nz-form-control>
+            <div
+              id="upload-image-container"
+              [class.to-be-uploaded-image-container]="!isUploadedPictureBase64"
+            >
+              <input
+                type="file"
+                id="upload-image-input"
+                (change)="uploadMediaPicture($event)"
+              />
+              <span *ngIf="!uploadedPictureBase64">Upload</span
+              ><img
+                id="uploaded-image"
+                *ngIf="uploadedPictureBase64"
+                [src]="'data:image/png;base64,' + uploadedPictureBase64"
+              />
+            </div>
+          </nz-form-control>
+        </nz-form-item>
+
+        <div class="right-picture-cover">
+          <nz-form-item>
+            <nz-form-label nzFor="bookType">Book Type</nz-form-label>
+            <nz-form-control>
+              <nz-select formControlName="bookType">
+                <nz-option
+                  *ngFor="let bookType of selectBookTypes(bookTypes)"
+                  [nzLabel]="bookType"
+                  [nzValue]="bookType"
+                ></nz-option>
+              </nz-select>
+              <div
+                class="is-error help"
+                *ngIf="bookType?.errors?.['required'] && bookType?.dirty"
+              >
+                Please add the book type!
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+
+          <div class="number-inputs">
+            <nz-form-item>
+              <nz-form-label nzFor="size">Size</nz-form-label>
+              <nz-form-control>
+                <input
+                  type="number"
+                  nz-input
+                  nzOverlayClassName="numeric-input"
+                  placeholder="book size"
+                  formControlName="size"
+                />
+                <div
+                  class="is-error help"
+                  *ngIf="size?.errors?.['required'] && size?.dirty"
+                >
+                  Please add the book size!
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nzFor="price">Price</nz-form-label>
+              <nz-form-control>
+                <input
+                  type="number"
+                  nz-input
+                  nzOverlayClassName="numeric-input"
+                  placeholder="book price"
+                  formControlName="price"
+                />
+                <div
+                  class="is-error help"
+                  *ngIf="price?.errors?.['required'] && price?.dirty"
+                >
+                  Please add the book price!
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+      </div>
+
+      <nz-form-item>
+        <nz-form-label nzFor="language">Language</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="book language"
+            formControlName="language"
+          />
+          <div
+            class="is-error help"
+            *ngIf="language?.errors?.['required'] && language?.dirty"
+          >
+            Please add the book language!
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="publisher">Publisher</nz-form-label>
+        <nz-form-control>
+          <input
+            nz-input
+            placeholder="book publisher"
+            formControlName="publisher"
+          />
+          <div
+            class="is-error help"
+            *ngIf="publisher?.errors?.['required'] && publisher?.dirty"
+          >
+            Please add the book publisher!
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="bookGenre">Book Genres</nz-form-label>
+        <nz-form-control>
+          <nz-select
+            nzMode="multiple"
+            nzPlaceHolder="Please select"
+            [disabled]="isBookGenreOptionsSelectDisabled"
+            formControlName="bookGenre"
+            [nzDropdownRender]="renderTemplate"
+          >
+            <nz-option
+              *ngFor="let item of bookGenreOptions"
+              [nzLabel]="item.label"
+              [nzValue]="item.value"
+            ></nz-option
+          ></nz-select>
+          <div
+            class="is-error help"
+            *ngIf="bookGenre?.errors?.['required'] && bookGenre?.dirty"
+          >
+            Please add the book genre!
+          </div>
+          <ng-template #renderTemplate>
+            <div class="add-item-container">
+              <input type="text" nz-input #inputElement />
+              <a (click)="addItemToDropdown(inputElement)"> + Add item </a>
+            </div>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzFor="description">Description</nz-form-label>
+        <nz-form-control>
+          <textarea
+            nz-input
+            placeholder="book description"
+            formControlName="description"
+            rows="6"
+          ></textarea>
+          <div
+            class="is-error help"
+            *ngIf="description?.errors?.['required'] && description?.dirty"
+          >
+            Please add the book description!
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+    <div class="submit-btn">
+      <button
+        [nzLoading]="loading"
+        nz-button
+        nzType="primary"
+        class="btn"
+        (click)="verifyData()"
+      >
+        Submit
+      </button>
+    </div>
+  </ng-container>
+</nz-modal>

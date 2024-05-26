@@ -1,0 +1,63 @@
+@import "../../../../assets/styles/colors.scss";
+
+.carousel {
+  background-color: var(--lighter-secondary);
+  height: 25vh;
+  width: 70vw;
+  margin: 0px 20px;
+
+  .book-container {
+    .carousel-array {
+      display: flex;
+      justify-content: space-evenly;
+      height: 22vh;
+
+      padding-top: 1rem;
+      .book {
+        cursor: pointer;
+
+        height: calc(18vh);
+        width: calc(10vw);
+
+        font-size: 12px;
+        position: relative;
+
+        .book-picture-container {
+          height: calc(15vh);
+          width: calc(5vw);
+          .book-picture {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+
+          .heart {
+            height: 2rem;
+            position: absolute;
+            top: -0.5rem;
+            right: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.pop-over-title {
+  color: var(--secondary);
+  font-weight: 500;
+  text-align: center;
+}
+
+.pop-over-author {
+  text-align: center;
+  color: var(--secondary);
+}
+
+@media only screen and (max-width: 1400px) {
+
+  .heart {
+    top: -0.5rem;
+    right: 0rem;
+  }
+}

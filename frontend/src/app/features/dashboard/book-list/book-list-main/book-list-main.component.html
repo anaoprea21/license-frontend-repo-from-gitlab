@@ -1,0 +1,27 @@
+<div class="page-content">
+  <div class="page-title">{{ pageTitle }}</div>
+  <div *ngIf="pageType === 'wishlist'">
+    <app-wishlist-book-list
+      *ngIf="!isBookListEmpty"
+      (refreshWishlistBooksEmitter)="getWishlistBooks()"
+      [books]="books"
+    ></app-wishlist-book-list>
+  </div>
+
+  <div *ngIf="pageType === 'cart'">
+    <app-cart-book-list
+      *ngIf="!isBookListEmpty &&cartBooks"
+      (refreshCartBooks)="getCartBooks()"
+      [cartBooks]="cartBooks"
+    ></app-cart-book-list>
+  </div>
+
+  <div *ngIf="isBookListEmpty" class="no-books-yet-container">
+    <span>Your {{pageType === 'wishlist'? 'wishlist':'cart'}} is empty.</span>
+    <span
+      >Click
+      <span class="redirect-span" routerLink="/dashboard">here</span> to go
+      back to shopping...</span
+    >
+  </div>
+</div>

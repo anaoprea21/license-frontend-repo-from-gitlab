@@ -1,0 +1,36 @@
+@import "../../../../../assets/styles/colors.scss";
+
+.table-row-book-details-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .book-cover {
+    width: 3rem;
+    height: 5rem;
+  }
+  .book-text-details-container {
+    display: flex;
+    flex-direction: column;
+
+    color: var(--secondary);
+    .book-title {
+      font-weight: 600;
+    }
+    .book-author {
+      font-weight: 200;
+    }
+    .book-type {
+      font-weight: 200;
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.non-clickable-span {
+  cursor: default;
+  width: max-content;
+}

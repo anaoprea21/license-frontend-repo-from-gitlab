@@ -1,0 +1,56 @@
+<div div="carousel-group">
+  <nz-carousel
+    nzAutoPlay
+    [nzAutoPlaySpeed]="9000"
+    class="carousel"
+    [nzDotPosition]="carouselTabPosition"
+  >
+    <!-- font prea mic -->
+    <div
+      class="book-container"
+      nz-carousel-content
+      *ngFor="let booksArray of data"
+    >
+      <div class="carousel-array">
+        <div *ngFor="let book of booksArray">
+          <div
+            (click)="goToSpecificBookPage(book.id)"
+            class="book"
+            nz-popover
+            nzType="primary"
+            [nzPopoverContent]="bookInfo"
+          >
+            <div style="display: flex; justify-content: center">
+              <div class="book-picture-container">
+                <img
+                  [src]="'data:image/png;base64,' + book.picture"
+                  class="book-picture"
+                />
+                <img
+                  *ngIf="book.wishListed"
+                  class="heart"
+                  src="../../../../assets/pictures/heart.svg"
+                />
+              </div>
+            </div>
+
+            <div style="text-align: center; padding-top: 0.5rem">
+              {{ book.title }}
+            </div>
+            <ng-template #bookInfo>
+              <div class="pop-over-title">{{ book.title }}</div>
+              <div class="pop-over-author">{{ book.author }}</div>
+              <div>
+                <nz-rate
+                  [ngModel]="book.rating"
+                  nzAllowHalf
+                  nzDisabled
+                ></nz-rate>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nz-carousel>
+</div>

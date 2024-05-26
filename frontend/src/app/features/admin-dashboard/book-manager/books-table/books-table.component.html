@@ -1,0 +1,124 @@
+<div>
+  <nz-table
+    [nzData]="booksData"
+    [nzFrontPagination]="false"
+    [nzLoading]="isLoading"
+  >
+    <thead>
+      <tr>
+        <th
+          [nzSortFn]="true"
+          [nzSortOrder]="
+            filters.orderBy === sortField.title
+              ? filters.isDesc === 'ASC'
+                ? 'ascend'
+                : 'descend'
+              : null
+          "
+          [nzSortDirections]="['descend', 'ascend', null]"
+          (nzSortOrderChange)="changeSortOrder($event, sortField.title)"
+        >
+          Book
+        </th>
+        <th nzColumnKey="gender" [nzFilterFn]="true">Genres</th>
+        <th
+          [nzSortFn]="true"
+          [nzSortOrder]="
+            filters.orderBy === sortField.publisher
+              ? filters.isDesc === 'ASC'
+                ? 'ascend'
+                : 'descend'
+              : null
+          "
+          [nzSortDirections]="['descend', 'ascend', null]"
+          (nzSortOrderChange)="changeSortOrder($event, sortField.publisher)"
+        >
+          Publisher
+        </th>
+        <th
+          [nzSortFn]="true"
+          [nzSortOrder]="
+            filters.orderBy === sortField.rating
+              ? filters.isDesc === 'ASC'
+                ? 'ascend'
+                : 'descend'
+              : null
+          "
+          [nzSortDirections]="['descend', 'ascend', null]"
+          (nzSortOrderChange)="changeSortOrder($event, sortField.rating)"
+        >
+          Rating
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="clickable"
+        *ngFor="let book of booksData"
+        (click)="goToBookPage(book.id)"
+      >
+        <td>
+          <span
+            class="table-row-book-details-container non-clickable-span"
+            (click)="$event.stopPropagation()"
+          >
+            <img
+              [src]="'data:image/png;base64,' + book.picture"
+              class="book-cover"
+            />
+            <div class="book-text-details-container">
+              <span class="book-title">{{ book.title }}</span>
+              <span class="book-author">{{ book.author }}</span>
+              <span class="book-type">Format: {{ book.type }}</span>
+            </div>
+          </span>
+        </td>
+        <td>
+          <span (click)="$event.stopPropagation()" class="non-clickable-span"
+            ><div *ngFor="let genre of book.genres">{{ genre }}</div></span
+          >
+        </td>
+        <td>
+          <span (click)="$event.stopPropagation()" class="non-clickable-span">{{
+            book.publisher
+          }}</span>
+        </td>
+        <td>
+          <span
+            (click)="$event.stopPropagation()"
+            class="non-clickable-span book-rating"
+          >
+            <nz-rate
+              [ngModel]="book.rating / 2"
+              nzAllowHalf
+              nzDisabled
+            ></nz-rate
+          ></span>
+        </td>
+        <td>
+          <span (click)="$event.stopPropagation()" class="non-clickable-span"
+            ><a nz-dropdown [nzDropdownMenu]="menu">
+              ☰
+              <span nz-icon nzType="down"></span>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                <li nz-menu-item (click)="editBook(book.id)">Edit Book</li>
+                <li nz-menu-item (click)="deleteBook(book.id)">Delete Book</li>
+              </ul>
+            </nz-dropdown-menu>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <app-book-manager-modal
+    *ngIf="isVisible"
+    [isEditing]="isEditing"
+    (refreshTableData)="refreshData()"
+    [(isVisible)]="isVisible"
+    [bookData]="bookData"
+  ></app-book-manager-modal>
+</div>

@@ -1,0 +1,75 @@
+<div id="full-year-management-page">
+  <div id="calendar-section">
+    <div class="page-title">My Calendar Events</div>
+
+    <div>
+      <div
+        [class.no-events]="calendarEvents?.length === 0"
+        [class.cards-container]="calendarEvents?.length !== 0"
+      >
+        <nz-card
+          class="card-content new-card"
+          nz-tooltip
+          nzTooltipTitle="Add new event"
+          (click)="makeNewEventModalVisible()"
+          >+</nz-card
+        >
+        <div *ngFor="let event of calendarEvents">
+          <nz-card class="card">
+            <div class="card-content">
+              <div class="event-details">
+                <div class="text">
+                  <div class="img-container">
+                    <img
+                      [src]="'data:image/png;base64,' + event.bookCover"
+                      class="img"
+                    />
+                  </div>
+                  <div class="date-details">
+                    <span class="week-day">{{ event.day }}</span>
+                    <span>{{ event.time | date : "dd MMM, HH:mm" }}</span>
+                  </div>
+                </div>
+                <div class="book-title">
+                  {{ event.bookTitle }}
+                </div>
+              </div>
+              <div class="time-left-container">
+                {{ event.timeLeft }}
+              </div>
+            </div>
+            <button
+              (click)="confirmEventRemoval(event.id)"
+              nz-tooltip
+              nzTooltipTitle="Delete event"
+              class="more-btn"
+              nz-button
+              nzType="primary"
+            >
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-create-event-modal
+    *ngIf="isNewEventModalVisible"
+    [(isVisible)]="isNewEventModalVisible"
+    [isEditingEvent]="false"
+    [libraryBooks]="libraryBooks"
+    (refreshData)="getEvents()"
+  ></app-create-event-modal>
+
+  <nz-modal
+    [(nzVisible)]="isConfirmModalVisible"
+    nzTitle="Delete Event"
+    (nzOnCancel)="changeConfirmDeleteVisibility()"
+    (nzOnOk)="changeConfirmDeleteVisibility(true)"
+  >
+    <ng-container *nzModalContent>
+      <div>This event will be deleted. Are you sure you want to proceed?</div>
+    </ng-container>
+  </nz-modal>
+</div>
